@@ -1,6 +1,6 @@
 import { Page } from 'playwright';
-import { BrowserService } from './../utils/browser.service';
-import { ManageCases } from './../../pages/CiviCase/manage-cases.page';
+import BrowserService from '../../src/utils/browser.service';
+import { ManageCases } from '../../src/pages/civicase/manage-cases.page';
 
 describe('Manage Cases', function () {
   let page: Page;
@@ -17,7 +17,8 @@ describe('Manage Cases', function () {
 
   beforeEach(async () => {
     page = await browser.newPage();
-    manageCases = new ManageCases(page);
+
+    manageCases = new ManageCases(browser);
   });
 
   afterEach(async () => {
@@ -26,11 +27,12 @@ describe('Manage Cases', function () {
 
   describe('on navigate', function () {
     beforeEach(async () => {
-      await manageCases.navigate();
+      await browser.loadCookies();
+      await manageCases.navigate(page);
     });
 
-    it('should work', async () => {
-      expect(await page.title()).toBe('Google');
+    it('should show manage cases page title', async () => {
+      expect(await page.title()).toBe(manageCases.pageTitle);
     });
   });
 });

@@ -5,6 +5,7 @@
     "strictNullChecks": true,
     "sourceMap": false,
     "allowJs": false,
+    "declaration": true,
     "baseUrl": "./"
   }
 }
